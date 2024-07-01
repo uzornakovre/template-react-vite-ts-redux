@@ -1,0 +1,7 @@
+@import "../../styles/index.scss";
+
+.snackbar {
+  left: 50% !important;
+  transform: translateX(-50%);
+  z-index: 100000;
+}
