@@ -1,32 +1,24 @@
-import styles from "./alert-snackbar.module.scss";
-import { Alert, Snackbar } from "@mui/material";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../services/hooks";
+import styles from "./alert-snackbar.module.scss"
+import { Alert, Snackbar } from "@mui/material"
+import { useAppDispatch, useAppSelector } from "../../services/hooks"
 import {
   getAlertMessageFromStore,
   getAlertTypeFromStore,
   getIsAlertOpenFromStore,
-} from "../../services/alerts/selectors";
-import { getBasketsErrorFromStore } from "../../services/baskets/selectors";
-import { getAnalyticsErrorFromStore } from "../../services/analytics/selectors";
-import { getAssessorsErrorFromStore } from "../../services/assessors/selectors";
-import { closeAlert, setAlert } from "../../services/alerts/alerts-slice";
+} from "../../services/alerts/selectors"
+import { closeAlert } from "../../services/alerts/alerts-slice"
 
 const AlertSnackbar = () => {
-  const dispatch = useAppDispatch();
-  const isAlertOpen = useAppSelector(getIsAlertOpenFromStore);
-  const alertType = useAppSelector(getAlertTypeFromStore);
-  const alertMessage = useAppSelector(getAlertMessageFromStore);
-  const basketError = useAppSelector(getBasketsErrorFromStore);
-  const analyticsError = useAppSelector(getAnalyticsErrorFromStore);
-  const assessorsError = useAppSelector(getAssessorsErrorFromStore);
+  const dispatch = useAppDispatch()
+  const isAlertOpen = useAppSelector(getIsAlertOpenFromStore)
+  const alertType = useAppSelector(getAlertTypeFromStore)
+  const alertMessage = useAppSelector(getAlertMessageFromStore)
 
-  useEffect(() => {
-    const errorMessage = basketError || analyticsError || assessorsError;
-    if (errorMessage) {
-      dispatch(setAlert({ type: "error", message: errorMessage }));
-    }
-  }, [basketError, analyticsError, assessorsError, dispatch]);
+  // useEffect(() => {
+  //   if (error) {
+  //     dispatch(setAlert({ type: "error", message: error }));
+  //   }
+  // }, [error, dispatch]);
 
   return (
     <Snackbar
@@ -43,7 +35,7 @@ const AlertSnackbar = () => {
         {alertMessage}
       </Alert>
     </Snackbar>
-  );
-};
+  )
+}
 
-export default AlertSnackbar;
+export default AlertSnackbar
